@@ -737,23 +737,14 @@ export default class GooglePlacesAutocomplete extends Component {
       this.state.listViewDisplayed === true
     ) {
       return (
-        <FlatList
-          scrollEnabled={!this.props.disableScroll}
+        <ScrollView
           style={[
             this.props.suppressDefaultStyles ? {} : defaultStyles.listView,
             this.props.styles.listView
           ]}
-          data={this.state.dataSource}
-          keyExtractor={keyGenerator}
-          extraData={[this.state.dataSource, this.props]}
-          ItemSeparatorComponent={this._renderSeparator}
-          renderItem={({ item }) => this._renderRow(item)}
-          ListHeaderComponent={
-            this.props.renderHeaderComponent && this.props.renderHeaderComponent(this.state.text)
-          }
-          ListFooterComponent={this._renderPoweredLogo}
-          {...this.props}
-        />
+        >
+          {data.map(({ item }) => this._renderRow(item))}
+        </ScrollView>
       );
     }
 
